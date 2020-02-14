@@ -1,7 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'shop/base.html' %}
+
 {% load static %}
+
 {% block content %}
-<body>
     <div class="page-wrapper">
         <header class="header">
             <div class="header-top">
@@ -209,7 +210,8 @@
                                                 </div><!-- End .demo-item -->
 
                                                 <div class="demo-item hidden">
-                                                    <a href="index-21.html">
+                                                    href="{% static 'assets/images/icons/apple-touch-icon.png' %}">
+                                                    <a href="{% static 'index-21.html'%}>"
                                                         <span class="demo-bg" style="background-image: url(assets/images/menu/demos/21.jpg);"></span>
                                                         <span class="demo-title">21 - sport store</span>
                                                     </a>
