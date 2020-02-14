@@ -8,5 +8,5 @@ from shop.models import Category
 def category_list(request, word=None):
     template = get_template('shop/categories.html')
     categories = Category.objects.all()
-    body = template.render({'categories': categories, 'title': word})
+    body  = template.render({'categories': categories, 'title': word})
     return HttpResponse(body)
