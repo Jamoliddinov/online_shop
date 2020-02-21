@@ -17,10 +17,18 @@ from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
 
+from shop.views import category_list, index_list, login_list, product_list
+
+
 def index(request):
    return HttpResponse('Hello World')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
+    path('category/', category_list, name='category_list'),
+    path('index/', index_list),
+    path('login/', login_list, name='login'),
+    path('product/', product_list, name='product_list'),
+    # path('404/', notFoundPage_list)
 ]
