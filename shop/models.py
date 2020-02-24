@@ -5,26 +5,26 @@ UserModel = get_user_model()
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=15)
+    name = models.CharField(max_length=255)
 
     def str(self):
         return self.name
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=15)
-    title = models.CharField(max_length=15)
+    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     img = models.ImageField(null=True)
-    description = models.CharField(max_length=15)
+    description = models.CharField(max_length=255)
     quantity = models.IntegerField()
-    prise = models.FloatField()
+    price = models.FloatField()
     link = models.URLField()
-    categories = models.ManyToManyField(Category, through="ProductCategory")
+    categories = models.ManyToManyField(Category)
 
     @property
     def rating(self):
         p = 0
-        productratings = self.productretings.all()
+        productratings = self.ProductRating.all()
         for productrating in productratings:
             p += productrating.rating
         return p / len(productratings) if p > 0 else 0
@@ -60,14 +60,11 @@ class ProductPhoto(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="productphotos")
     photo = models.ImageField(upload_to="imageProduct")
 
-class ProductCategory(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_categories")
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="product_categories")
-    time = models.DateTimeField(auto_now_add=True)
-
 class ProductRating(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="productratings")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="productratings",null=True)
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name="productratings")
+    title = models.CharField(max_length=255,null=True)
+    description = models.CharField(max_length=255,null=True)
     rating = models.PositiveIntegerField()
 
     class Meta:

@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
 
-from shop.views import category_list, index_list, login_list, product_list
+from shop.views import category_list, index_list, login_list, product_list, product_detail
 
 
 def index(request):
@@ -29,6 +29,6 @@ urlpatterns = [
     path('category/', category_list, name='category_list'),
     path('index/', index_list),
     path('login/', login_list, name='login'),
-    path('product/', product_list, name='product_list'),
+    path('product/<int:pk>', product_detail, name='product_detail'),
     # path('404/', notFoundPage_list)
 ]

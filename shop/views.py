@@ -1,14 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
 from django.template.loader import get_template
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 
-from shop.models import Category
-from shop.models import Login
-from shop.models import Error
+from shop.models import Category, ProductSize, ProductColor, ProductPhoto
 from shop.models import Product
-from shop.models import Index
 
 
 def category_list(request):
@@ -42,9 +38,9 @@ def login_list(request):
             return HttpResponseRedirect(reverse('login'))
 
 
-def product_list(request):
+def product_list(request, pk):
     template = get_template('shop/product.html')
-    product = Product.objects.all()
+    product = Product.objects.filter(pk=pk).all()
     body = template.render({'product': product})
     return HttpResponse(body)
 
@@ -54,3 +50,13 @@ def index_list(request):
     index = Index.objects.all()
     body = template.render({'index': index})
     return HttpResponse(body)
+
+
+def product_detail(request, pk):
+    product = Product.objects.filter(pk=pk).get()
+    product_sizes = ProductSize.objects.filter(product=product).all()
+    product_colors = ProductColor.objects.filter(product=product).all()
+    product_photos = ProductPhoto.objects.filter(product=product).all()
+    template = get_template('shop/product.html')
+    r = template.render({'product': product, 'product_sizes': product_sizes, 'product_colors': product_colors, 'product_photos':product_photos})
+    return HttpResponse(r)
