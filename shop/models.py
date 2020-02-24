@@ -12,22 +12,29 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     img = models.ImageField(null=True)
-    description = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, null=True, blank=True)
     quantity = models.IntegerField()
     price = models.FloatField()
-    link = models.URLField()
-    categories = models.ManyToManyField(Category)
+    link = models.URLField(null=True, blank=True)
+    categories = models.ManyToManyField(Category, null=True, blank=True)
 
     @property
     def rating(self):
         p = 0
-        productratings = self.ProductRating.all()
+        productratings = self.productratings.all()
         for productrating in productratings:
             p += productrating.rating
         return p / len(productratings) if p > 0 else 0
+
+    @property
+    def rating_percentage(self):
+        return self.rating / 5 * 100
+
+    @property
+    def rating_count(self):
+        return len(self.productratings.all())
 
 class ProductSize(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_sizes')

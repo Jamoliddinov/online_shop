@@ -1,9 +1,10 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template.loader import get_template
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 
-from shop.models import Category, ProductSize, ProductColor, ProductPhoto
+from shop.models import Category, ProductSize, ProductColor, ProductPhoto, ProductRating
 from shop.models import Product
 
 
@@ -53,10 +54,14 @@ def index_list(request):
 
 
 def product_detail(request, pk):
-    product = Product.objects.filter(pk=pk).get()
+    try:
+        product = Product.objects.filter(pk=pk).get()
+    except ObjectDoesNotExist:
+        raise Http404()
     product_sizes = ProductSize.objects.filter(product=product).all()
     product_colors = ProductColor.objects.filter(product=product).all()
     product_photos = ProductPhoto.objects.filter(product=product).all()
+    product_ratings = ProductRating.objects.filter(product=product).all()
     template = get_template('shop/product.html')
-    r = template.render({'product': product, 'product_sizes': product_sizes, 'product_colors': product_colors, 'product_photos':product_photos})
+    r = template.render({'product': product, 'product_sizes': product_sizes, 'product_colors': product_colors, 'product_photos':product_photos , 'product_ratings':product_ratings})
     return HttpResponse(r)

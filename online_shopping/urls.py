@@ -13,10 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
 
+from online_shopping import settings
 from shop.views import category_list, index_list, login_list, product_list, product_detail
 
 
@@ -32,3 +34,6 @@ urlpatterns = [
     path('product/<int:pk>', product_detail, name='product_detail'),
     # path('404/', notFoundPage_list)
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
