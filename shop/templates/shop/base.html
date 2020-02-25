@@ -37,7 +37,11 @@
     {% endblock %}
 </head>
 <body>
+    {% block nav_bar %}
+    {% endblock %}
+
     {% block content %}
+
     {% endblock %}
     <!-- Plugins JS File -->
     <script src="{% static 'assets/js/jquery.min.js'%}"></script>
