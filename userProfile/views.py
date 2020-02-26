@@ -1,9 +1,12 @@
-from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotAllowed
 from django.shortcuts import render
 from django.template.loader import get_template
 from django.urls import reverse
+from django.views import View
 
+UserModel = get_user_model()
 
 def login_list(request):
     if request.method == 'GET':
@@ -23,7 +26,20 @@ def login_list(request):
 
 
 def register(request):
-    return HttpResponse()
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        try:
+            UserModel.objects.filter(username=email).get()
+            return HttpResponseRedirect(reverse('login'))
+        except ObjectDoesNotExist:
+            user = UserModel.objects.create(username=email)
+            user.set_password(password)
+            user.save()
+            login(request, user)
+            return HttpResponseRedirect(reverse('category_list'))
+    else:
+        return HttpResponseNotAllowed(['POST'])
 
 
 class LogoutView(View):

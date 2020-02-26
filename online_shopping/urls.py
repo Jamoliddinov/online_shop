@@ -20,6 +20,7 @@ from django.http import HttpResponse
 
 from online_shopping import settings
 from shop.views import category_list, index_list, login_list, product_list, product_detail
+from userProfile.views import register
 
 
 def index(request):
@@ -31,6 +32,7 @@ urlpatterns = [
     path('category/', category_list, name='category_list'),
     path('index/', index_list),
     path('login/', login_list, name='login'),
+    path('register/', register, name='register'),
     path('product/<int:pk>', product_detail, name='product_detail'),
     # path('404/', notFoundPage_list)
 ]

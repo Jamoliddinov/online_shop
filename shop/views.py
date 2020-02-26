@@ -1,5 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.shortcuts import render
 from django.template.loader import get_template
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
@@ -24,17 +25,17 @@ def category_list(request):
 
 def login_list(request):
     if request.method == 'GET':
-        template = get_template('shop/login.html')
-        body = template.render({})
-        return HttpResponse(body)
+        # template = get_template('shop/login.html')
+        # body = template.render({'request': request})
+        return render(request, 'shop/login.html', {})
     else:
-        username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=email, password=password)
         if user:
             # sucessful login
             login(request, user)
-            return HttpResponseRedirect(reverse('product_list'))
+            return HttpResponseRedirect(reverse('category_list'))
         else:
             return HttpResponseRedirect(reverse('login'))
 
