@@ -73,6 +73,11 @@ class ProductRating(models.Model):
     title = models.CharField(max_length=255,null=True)
     description = models.CharField(max_length=255,null=True)
     rating = models.PositiveIntegerField()
+   # created_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def rating_percentage(self):
+        return self.rating / 5 * 100
 
     class Meta:
         unique_together = ['product', 'user']

@@ -64,5 +64,5 @@ def product_detail(request, pk):
     product_photos = ProductPhoto.objects.filter(product=product).all()
     product_ratings = ProductRating.objects.filter(product=product).all()
     template = get_template('shop/product.html')
-    r = template.render({'product': product, 'product_sizes': product_sizes, 'product_colors': product_colors, 'product_photos':product_photos , 'product_ratings':product_ratings})
+    r = template.render({'product': product, 'product_sizes': product_sizes, 'product_colors': product_colors, 'product_photos':product_photos , 'product_ratings' : product_ratings})
     return HttpResponse(r)
