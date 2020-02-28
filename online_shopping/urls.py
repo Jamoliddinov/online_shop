@@ -19,12 +19,13 @@ from django.urls import path
 from django.http import HttpResponse
 
 from online_shopping import settings
-from shop.views import category_list, index_list, login_list, product_list, product_detail
+from shop.views import category_list, index_list, login_list, product_list, product_detail, cart
 from userProfile.views import register
 
 
 def index(request):
-   return HttpResponse('Hello World')
+    return HttpResponse('Hello World')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,6 +34,7 @@ urlpatterns = [
     path('index/', index_list),
     path('login/', login_list, name='login'),
     path('register/', register, name='register'),
+    path('cart/', cart, name='cart'),
     path('product/<int:pk>', product_detail, name='product_detail'),
     # path('404/', notFoundPage_list)
 ]

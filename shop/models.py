@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+
 UserModel = get_user_model()
 
 
@@ -36,6 +37,7 @@ class Product(models.Model):
     def rating_count(self):
         return len(self.productratings.all())
 
+
 class ProductSize(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_sizes')
     size = models.FloatField()
@@ -59,25 +61,23 @@ class Cart(models.Model):
 
 
 class CartProduct(models.Model):
-    cart = models.ForeignKey(Cart,on_delete=models.CASCADE,related_name='CartProduct')
-    product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name='cartproducts')
+
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='CartProduct')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cartproducts')
     quantity = models.PositiveIntegerField()
+
 
 class ProductPhoto(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="productphotos")
     photo = models.ImageField(upload_to="imageProduct")
 
-class ProductRating(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="productratings",null=True)
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name="productratings")
-    title = models.CharField(max_length=255,null=True)
-    description = models.CharField(max_length=255,null=True)
-    rating = models.PositiveIntegerField()
-   # created_at = models.DateTimeField(auto_now_add=True)
 
-    @property
-    def rating_percentage(self):
-        return self.rating / 5 * 100
+class ProductRating(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="productratings", null=True)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name="productratings")
+    title = models.CharField(max_length=255, null=True)
+    description = models.CharField(max_length=255, null=True)
+    rating = models.PositiveIntegerField()
 
     class Meta:
         unique_together = ['product', 'user']
