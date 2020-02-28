@@ -19,7 +19,7 @@ class Product(models.Model):
     quantity = models.IntegerField()
     price = models.FloatField()
     link = models.URLField(null=True, blank=True)
-    categories = models.ManyToManyField(Category, null=True, blank=True)
+    categories = models.ManyToManyField(Category, blank=True)
 
     @property
     def rating(self):
