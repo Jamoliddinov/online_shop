@@ -567,21 +567,11 @@
                                         </figure><!-- End .product-main-image -->
 
                                         <div id="product-zoom-gallery" class="product-image-gallery">
-                                            <a class="product-gallery-item active" href="#" data-image="{% static 'assets/images/products/single/1.jpg' %}" data-zoom-image="{% static 'assets/images/products/single/1-big.jpg' %}">
-                                                <img src="{% static 'assets/images/products/single/1-small.jpg' %}" alt="product side">
+                                            {% for img in product_photos %}
+                                            <a class="product-gallery-item" href="#" data-image="{{img.photo.url}}" data-zoom-image="{{img.photo.url}}">
+                                                <img src="{{img.photo.url}}" alt="product side">
                                             </a>
-
-                                            <a class="product-gallery-item" href="#" data-image="{% static 'assets/images/products/single/2.jpg' %}" data-zoom-image="{% static 'assets/images/products/single/2-big.jpg' %}">
-                                                <img src="{% static 'assets/images/products/single/2-small.jpg' %}" alt="product cross">
-                                            </a>
-
-                                            <a class="product-gallery-item" href="#" data-image="{% static 'assets/images/products/single/3.jpg' %}" data-zoom-image="{% static 'assets/images/products/single/3-big.jpg' %}">
-                                                <img src="{% static 'assets/images/products/single/3-small.jpg' %}" alt="product with model">
-                                            </a>
-
-                                            <a class="product-gallery-item" href="#" data-image="{% static 'assets/images/products/single/4.jpg' %}" data-zoom-image="{% static 'assets/images/products/single/4-big.jpg' %}">
-                                                <img src="{% static 'assets/images/products/single/4-small.jpg' %}" alt="product back">
-                                            </a>
+                                            {% endfor %}
                                         </div><!-- End .product-image-gallery -->
                                     </div><!-- End .row -->
                                 </div><!-- End .product-gallery -->
@@ -652,7 +642,9 @@
                                     <div class="product-details-footer">
                                         <div class="product-cat">
                                             <span>Category:</span>
-                                            <a> {{product.categories}}</a>
+                                            {% for category in product_categories %}
+                                            <a> {{category.name}}</a>
+                                            {% endfor %}
                                         </div><!-- End .product-cat -->
 
                                         <div class="social-icons social-icons-sm">
@@ -670,26 +662,26 @@
 
                     <div class="product-details-tab">
                             <div class="nav-item" align="center">
-                                <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews ({{product.rating_count}})</a>
+                                <a class="nav-link active" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews ({{product.rating_count}})</a>
                             </div>
-                            <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
+                            <div class="tab-pane fade active show" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
                                 <div class="reviews">
-                                    {% for reviews in product_ratings %}
+                                    {% for product_rating in product_ratings %}
                                     <div class="review">
                                         <div class="row no-gutters">
                                             <div class="col-auto">
-                                                <h4><a href="#">{{reviews.user.first_name}}</a></h4>
+                                                <h4><a href="#">{{product_rating.user.first_name}}</a></h4>
                                                 <div class="ratings-container">
                                                     <div class="ratings">
-                                                        <div class="ratings-val" style="width: {{reviews.rating_percentage}}%;"></div><!-- End .ratings-val -->
+                                                        <div class="ratings-val" style="width: {{product_rating.rating_percentage}}%;"></div><!-- End .ratings-val -->
                                                     </div><!-- End .ratings -->
                                                 </div><!-- End .rating-container -->
-                                                <span class="review-date"></span>
+                                                <span class="review-date">{{product_rating.created_at|timesince}} ago</span>
                                             </div><!-- End .col -->
                                             <div class="col">
-                                                <h4>{{reviews.title}}</h4>
+                                                <h4>{{product_rating.title}}</h4>
                                                 <div class="review-content">
-                                                    <p>{{reviews.description}}</p>
+                                                    <p>{{product_rating.description}}</p>
                                                 </div><!-- End .review-content -->
                                             </div><!-- End .col-auto -->
                                         </div><!-- End .row -->
