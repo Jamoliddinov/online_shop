@@ -362,8 +362,8 @@
                                             <div class="product product-7 text-center">
                                                 <figure class="product-media">
                                                     <span class="product-label label-new">New</span>
-                                                    <a href="product.html">
-                                                        <img src="{% static 'assets/images/products/' %}/{{ product.img }}"
+                                                    <a href="{% url 'product_detail' product.id %}">
+                                                        <img src="{{ product.img.url }}"
                                                              alt="Product image"
                                                              class="product-image">
 
@@ -386,36 +386,29 @@
 
                                                 <div class="product-body">
                                                     <div class="product-cat">
-                                                        <a href="#">Women</a>
+                                                        <a href="#">{{product.title }}</a>
                                                     </div><!-- End .product-cat -->
                                                     <h3 class="product-title"><a
-                                                            href="product.html">{{ product.title }}</a></h3>
+                                                            href="product.html">{{ product.description }}</a></h3>
                                                     <!-- End .product-title -->
                                                     <div class="product-price">
                                                         {{ product.price }}
                                                     </div><!-- End .product-price -->
                                                     <div class="ratings-container">
                                                         <div class="ratings">
-                                                            <div class="ratings-val" style="width: 20%;"></div>
+                                                            <div class="ratings-val" style="width: {{product.rating_percentage}}%;"></div>
                                                             <!-- End .ratings-val -->
                                                         </div><!-- End .ratings -->
-                                                        <span class="ratings-text">( 2 Reviews )</span>
+                                                        <span class="ratings-text">( {{product.rating_count}} Reviews )</span>
                                                     </div><!-- End .rating-container -->
 
                                                     <div class="product-nav product-nav-thumbs">
+                                                        {% for product_photo in product.productphotos.all %}
                                                         <a href="#" class="active">
-                                                            <img src="{% static 'assets/images/products/product-4-thumb.jpg' %}"
+                                                            <img src="{{ product_photo.photo.url }}"
                                                                  alt="product desc">
                                                         </a>
-                                                        <a href="#">
-                                                            <img src="{% static 'assets/images/products/product-4-2-thumb.jpg' %}"
-                                                                 alt="product desc">
-                                                        </a>
-
-                                                        <a href="#">
-                                                            <img src="{% static 'assets/images/products/product-4-3-thumb.jpg' %}"
-                                                                 alt="product desc">
-                                                        </a>
+                                                        {% endfor %}
                                                     </div><!-- End .product-nav -->
                                                 </div><!-- End .product-body -->
                                             </div><!-- End .product -->
