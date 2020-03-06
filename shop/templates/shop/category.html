@@ -89,203 +89,195 @@
                             </div><!-- End .toolbox-right -->
                         </div><!-- End .toolbox -->
 
-                        <div class="products mb-3">
-                            <div class="row justify-content-center">
-                                {% for product in products_pagination %}
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <div class="product product-7 text-center">
-                                            <figure class="product-media">
-                                                <span class="product-label label-new">New</span>
-                                                <a href="product.html">
-                                                    <img src="{% static 'assets/images/products/' %}/{{ product.img }}"
-                                                         alt="Product image"
-                                                         class="product-image">
+                            <div class="products mb-3">
+                                <div class="row justify-content-center">
+                                    {% for product in products_pagination %}
+                                        <div class="col-6 col-md-4 col-lg-4">
+                                            <div class="product product-7 text-center">
+                                                <figure class="product-media">
+                                                    <span class="product-label label-new">New</span>
+                                                    <a href="{% url 'product_detail' product.id %}">
+                                                        <img src="{{ product.img.url }}"
+                                                             alt="Product image"
+                                                             class="product-image">
 
+                                                    </a>
+                                                    <div class="product-action-vertical">
+                                                        <a href="#"
+                                                           class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                                        <a href="popup/quickView.html"
+                                                           class="btn-product-icon btn-quickview"
+                                                           title="Quick view"><span>Quick view</span></a>
+                                                        <a href="#" class="btn-product-icon btn-compare"
+                                                           title="Compare"><span>Compare</span></a>
+                                                    </div><!-- End .product-action-vertical -->
+
+                                                    <div class="product-action">
+                                                        <a href="#"
+                                                           class="btn-product btn-cart"><span>add to cart</span></a>
+                                                    </div><!-- End .product-action -->
+                                                </figure><!-- End .product-media -->
+
+                                                <div class="product-body">
+                                                    <div class="product-cat">
+                                                        <a href="#">{{product.title }}</a>
+                                                    </div><!-- End .product-cat -->
+                                                    <h3 class="product-title"><a
+                                                            href="product.html">{{ product.description }}</a></h3>
+                                                    <!-- End .product-title -->
+                                                    <div class="product-price">
+                                                        {{ product.price }}
+                                                    </div><!-- End .product-price -->
+                                                    <div class="ratings-container">
+                                                        <div class="ratings">
+                                                            <div class="ratings-val" style="width: {{product.rating_percentage}}%;"></div>
+                                                            <!-- End .ratings-val -->
+                                                        </div><!-- End .ratings -->
+                                                        <span class="ratings-text">( {{product.rating_count}} Reviews )</span>
+                                                    </div><!-- End .rating-container -->
+
+                                                    <div class="product-nav product-nav-thumbs">
+                                                        {% for product_photo in product.productphotos.all %}
+                                                        <a href="#" class="active">
+                                                            <img src="{{ product_photo.photo.url }}"
+                                                                 alt="product desc">
+                                                        </a>
+                                                        {% endfor %}
+                                                    </div><!-- End .product-nav -->
+                                                </div><!-- End .product-body -->
+                                            </div><!-- End .product -->
+                                        </div><!-- End .col-sm-6 col-lg-4 -->
+                                    {% endfor %}
+                                </div><!-- End .row -->
+                            </div><!-- End .products -->
+
+
+                            <nav aria-label="Page navigation">
+                                {% if products_pagination.has_other_pages %}
+                                    <ul class="pagination justify-content-center">
+                                        {% if products_pagination.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link page-link-prev"
+                                                   href="?page={{ products_pagination.previous_page_number }}"
+                                                   aria-label="Previous" tabindex="-1" aria-disabled="true">
+                                                    <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
                                                 </a>
-                                                <div class="product-action-vertical">
-                                                    <a href="#"
-                                                       class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                                    <a href="popup/quickView.html"
-                                                       class="btn-product-icon btn-quickview"
-                                                       title="Quick view"><span>Quick view</span></a>
-                                                    <a href="#" class="btn-product-icon btn-compare"
-                                                       title="Compare"><span>Compare</span></a>
-                                                </div><!-- End .product-action-vertical -->
-
-                                                <div class="product-action">
-                                                    <a href="{% url 'add_to_cart' product.id 1 %}"
-                                                       class=" btn-product btn-cart"><span>add to cart</span></a>
-                                                </div><!-- End .product-action -->
-                                            </figure><!-- End .product-media -->
-
-                                            <div class="product-body">
-                                                <div class="product-cat">
-                                                    <a href="#">Women</a>
-                                                </div><!-- End .product-cat -->
-                                                <h3 class="product-title"><a
-                                                        href="product.html">{{ product.title }}</a></h3>
-                                                <!-- End .product-title -->
-                                                <div class="product-price">
-                                                    {{ product.price }}
-                                                </div><!-- End .product-price -->
-                                                <div class="ratings-container">
-                                                    <div class="ratings">
-                                                        <div class="ratings-val" style="width: 20%;"></div>
-                                                        <!-- End .ratings-val -->
-                                                    </div><!-- End .ratings -->
-                                                    <span class="ratings-text">( 2 Reviews )</span>
-                                                </div><!-- End .rating-container -->
-
-                                                <div class="product-nav product-nav-thumbs">
-                                                    <a href="#" class="active">
-                                                        <img src="{% static 'assets/images/products/product-4-thumb.jpg' %}"
-                                                             alt="product desc">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="{% static 'assets/images/products/product-4-2-thumb.jpg' %}"
-                                                             alt="product desc">
-                                                    </a>
-
-                                                    <a href="#">
-                                                        <img src="{% static 'assets/images/products/product-4-3-thumb.jpg' %}"
-                                                             alt="product desc">
-                                                    </a>
-                                                </div><!-- End .product-nav -->
-                                            </div><!-- End .product-body -->
-                                        </div><!-- End .product -->
-                                    </div><!-- End .col-sm-6 col-lg-4 -->
-                                {% endfor %}
-                            </div><!-- End .row -->
-                        </div><!-- End .products -->
-
-
-                        <nav aria-label="Page navigation">
-                            {% if products_pagination.has_other_pages %}
-                                <ul class="pagination justify-content-center">
-                                    {% if products_pagination.has_previous %}
-                                        <li class="page-item">
-                                            <a class="page-link page-link-prev"
-                                               href="?page={{ products_pagination.previous_page_number }}"
-                                               aria-label="Previous" tabindex="-1" aria-disabled="true">
-                                                <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
-                                            </a>
+                                            </li>
+                                        {% endif %}
+                                        {% if products_pagination.has_previous %}
+                                            <li class="page-item"><a class="page-link"
+                                                                     href="?page={{ products_pagination.previous_page_number }}">{{ products_pagination.previous_page_number }}</a>
+                                            </li>
+                                        {% endif %}
+                                        <li class="page-item active"><a class="page-link"
+                                                                        href="?page={{ products_pagination.number }}">{{ products_pagination.number }}</a>
                                         </li>
-                                    {% endif %}
-                                    {% if products_pagination.has_previous %}
-                                        <li class="page-item"><a class="page-link"
-                                                                 href="?page={{ products_pagination.previous_page_number }}">{{ products_pagination.previous_page_number }}</a>
-                                        </li>
-                                    {% endif %}
-                                    <li class="page-item active"><a class="page-link"
-                                                                    href="?page={{ products_pagination.number }}">{{ products_pagination.number }}</a>
-                                    </li>
-                                    {% if products_pagination.has_next %}
-                                        <li class="page-item"><a class="page-link"
-                                                                 href="?page={{ products_pagination.next_page_number }}">{{ products_pagination.next_page_number }}</a>
-                                        </li>
-                                    {% endif %}
-                                    {% if products_pagination.has_next %}
-                                        <li class="page-item">
-                                            <a class="page-link page-link-next"
-                                               href="?page={{ products_pagination.next_page_number }}"
-                                               aria-label="Next">
-                                                Next <span aria-hidden="true"><i
-                                                    class="icon-long-arrow-right"></i></span>
-                                            </a>
-                                        </li>
-                                    {% endif %}
-                                </ul>
-                            {% endif %}
-                        </nav>
+                                        {% if products_pagination.has_next %}
+                                            <li class="page-item"><a class="page-link"
+                                                                     href="?page={{ products_pagination.next_page_number }}">{{ products_pagination.next_page_number }}</a>
+                                            </li>
+                                        {% endif %}
+                                        {% if products_pagination.has_next %}
+                                            <li class="page-item">
+                                                <a class="page-link page-link-next"
+                                                   href="?page={{ products_pagination.next_page_number }}"
+                                                   aria-label="Next">
+                                                    Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                {% endif %}
+                            </nav>
 
 
-                    </div><!-- End .col-lg-9 -->
-                    <aside class="col-lg-3 order-lg-first">
-                        <div class="sidebar sidebar-shop">
-                            <div class="widget widget-clean">
-                                <label>Filters:</label>
-                                <a href="#" class="sidebar-filter-clear">Clean All</a>
-                            </div><!-- End .widget widget-clean -->
+                        </div><!-- End .col-lg-9 -->
+                        <aside class="col-lg-3 order-lg-first">
+                            <div class="sidebar sidebar-shop">
+                                <div class="widget widget-clean">
+                                    <label>Filters:</label>
+                                    <a href="#" class="sidebar-filter-clear">Clean All</a>
+                                </div><!-- End .widget widget-clean -->
 
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true"
-                                       aria-controls="widget-1">
-                                        Category
-                                    </a>
-                                </h3><!-- End .widget-title -->
+                                <div class="widget widget-collapsible">
+                                    <h3 class="widget-title">
+                                        <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true"
+                                           aria-controls="widget-1">
+                                            Category
+                                        </a>
+                                    </h3><!-- End .widget-title -->
 
-                                <div class="collapse show" id="widget-1">
-                                    <div class="widget-body">
-                                        <div class="filter-items filter-items-count">
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-1">
-                                                    <label class="custom-control-label" for="cat-1">Dresses</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">3</span>
-                                            </div><!-- End .filter-item -->
+                                    <div class="collapse show" id="widget-1">
+                                        <div class="widget-body">
+                                            <div class="filter-items filter-items-count">
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="cat-1">
+                                                        <label class="custom-control-label" for="cat-1">Dresses</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count">3</span>
+                                                </div><!-- End .filter-item -->
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-2">
-                                                    <label class="custom-control-label" for="cat-2">T-shirts</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">0</span>
-                                            </div><!-- End .filter-item -->
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="cat-2">
+                                                        <label class="custom-control-label" for="cat-2">T-shirts</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count">0</span>
+                                                </div><!-- End .filter-item -->
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-3">
-                                                    <label class="custom-control-label" for="cat-3">Bags</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">4</span>
-                                            </div><!-- End .filter-item -->
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="cat-3">
+                                                        <label class="custom-control-label" for="cat-3">Bags</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count">4</span>
+                                                </div><!-- End .filter-item -->
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-4">
-                                                    <label class="custom-control-label" for="cat-4">Jackets</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">2</span>
-                                            </div><!-- End .filter-item -->
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="cat-4">
+                                                        <label class="custom-control-label" for="cat-4">Jackets</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count">2</span>
+                                                </div><!-- End .filter-item -->
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-5">
-                                                    <label class="custom-control-label" for="cat-5">Shoes</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">2</span>
-                                            </div><!-- End .filter-item -->
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="cat-5">
+                                                        <label class="custom-control-label" for="cat-5">Shoes</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count">2</span>
+                                                </div><!-- End .filter-item -->
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-6">
-                                                    <label class="custom-control-label" for="cat-6">Jumpers</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">1</span>
-                                            </div><!-- End .filter-item -->
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="cat-6">
+                                                        <label class="custom-control-label" for="cat-6">Jumpers</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count">1</span>
+                                                </div><!-- End .filter-item -->
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-7">
-                                                    <label class="custom-control-label" for="cat-7">Jeans</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">1</span>
-                                            </div><!-- End .filter-item -->
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="cat-7">
+                                                        <label class="custom-control-label" for="cat-7">Jeans</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count">1</span>
+                                                </div><!-- End .filter-item -->
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                    <label class="custom-control-label"
-                                                           for="cat-8">Sportwear</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">0</span>
-                                            </div><!-- End .filter-item -->
-                                        </div><!-- End .filter-items -->
-                                    </div><!-- End .widget-body -->
-                                </div><!-- End .collapse -->
-                            </div><!-- End .widget -->
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
+                                                        <label class="custom-control-label"
+                                                               for="cat-8">Sportwear</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count">0</span>
+                                                </div><!-- End .filter-item -->
+                                            </div><!-- End .filter-items -->
+                                        </div><!-- End .widget-body -->
+                                    </div><!-- End .collapse -->
+                                </div><!-- End .widget -->
 
                             <div class="widget widget-collapsible">
                                 <h3 class="widget-title">

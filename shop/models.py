@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils import timezone
 
 UserModel = get_user_model()
 
@@ -14,7 +15,7 @@ class Category(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=255)
     img = models.ImageField(null=True)
-    description = models.CharField(max_length =255, null=True, blank=True)
+    description = models.CharField(max_length=255, null=True, blank=True)
     quantity = models.IntegerField()
     price = models.FloatField()
     link = models.URLField(null=True, blank=True)
@@ -77,6 +78,7 @@ class ProductRating(models.Model):
     title = models.CharField(max_length=255, null=True)
     description = models.CharField(max_length=255, null=True)
     rating = models.PositiveIntegerField()
+    created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
         unique_together = ['product', 'user']
