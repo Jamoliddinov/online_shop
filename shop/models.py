@@ -1,9 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-<<<<<<< Updated upstream
-from django.utils import timezone
-=======
->>>>>>> Stashed changes
 
 UserModel = get_user_model()
 
@@ -81,7 +77,6 @@ class ProductRating(models.Model):
     title = models.CharField(max_length=255, null=True)
     description = models.CharField(max_length=255, null=True)
     rating = models.PositiveIntegerField()
-    created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
         unique_together = ['product', 'user']

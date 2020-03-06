@@ -86,14 +86,6 @@ def product_detail(request, pk):
     product_colors = ProductColor.objects.filter(product=product).all()
     product_photos = ProductPhoto.objects.filter(product=product).all()
     product_ratings = ProductRating.objects.filter(product=product).all()
-<<<<<<< Updated upstream
-    product_categories = Category.objects.filter(product=product).all()
-    template = get_template('shop/product.html')
-    r = template.render({'product': product, 'product_sizes': product_sizes, 'product_colors': product_colors,
-                         'product_photos': product_photos, 'product_ratings': product_ratings, 'product_categories' : product_categories})
-    return HttpResponse(r)
-=======
     return render(request, 'shop/product.html',
                   {'product': product, 'product_sizes': product_sizes, 'product_colors': product_colors,
                    'product_photos': product_photos, 'product_ratings': product_ratings})
->>>>>>> Stashed changes
