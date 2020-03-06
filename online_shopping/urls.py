@@ -15,27 +15,27 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
 from django.http import HttpResponse
+from django.urls import path
 
 from online_shopping import settings
-from shop.views import category_list, index_list, login_list, product_list, product_detail, cart
+from shop.views import category_list, index_list, login_list, product_detail, cart, add_to_cart, logout_user, index
 from userProfile.views import register
+from django.conf.urls.i18n import i18n_patterns
 
-
-def index(request):
-    return HttpResponse('Hello World')
-
+app_name = "shops"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
+    path('', index, name='index'),
     path('category/', category_list, name='category_list'),
     path('index/', index_list),
     path('login/', login_list, name='login'),
     path('register/', register, name='register'),
     path('cart/', cart, name='cart'),
+    path('cart/add-to-cart/<int:pk>/<int:quantity>/', add_to_cart, name='add_to_cart'),
     path('product/<int:pk>', product_detail, name='product_detail'),
+    path('logout/', logout_user, name='logout_user'),
     # path('404/', notFoundPage_list)
 ]
 

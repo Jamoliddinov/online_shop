@@ -1,24 +1,27 @@
+from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 from django.db.models import Index
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render
-from django.template.loader import get_template
-from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect, Http404
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from shop.models import Category, ProductSize, ProductColor, ProductPhoto, ProductRating, Product
+from shop.models import ProductSize, ProductColor, ProductPhoto, ProductRating, Product, Cart, CartProduct
 
 
 def category_list(request):
-    template = get_template('shop/category.html')
     products = Product.objects.all()
     paginator = Paginator(products, 6)
     page = request.GET.get('page', 1)
     products_pagination = paginator.page(page)
-    body = template.render({'products_pagination': products_pagination})
-    return HttpResponse(body)
-    # return render(request, 'shop/category.html', { 'products_pagination': products_pagination })
+    return render(request, 'shop/category.html', {'products_pagination': products_pagination, 'user': request.user})
+
+
+def add_to_cart(request, pk, quantity=1):
+    cart, created = Cart.objects.get_or_create(user=request.user, checked_at__isnull=True)
+    new_product_cart = CartProduct(cart=cart, product_id=pk, quantity=quantity)
+    new_product_cart.save()
+    return redirect(reverse('cart'))
 
 
 # do not touch it
@@ -32,7 +35,7 @@ def login_list(request):
     if request.method == 'GET':
         # template = get_template('shop/login.html')
         # body = template.render({'request': request})
-        return render(request, 'shop/login.html', {})
+        return render(request, 'shop/login.html', {'user': request.user})
     else:
         email = request.POST['email']
         password = request.POST['password']
@@ -46,23 +49,32 @@ def login_list(request):
 
 
 def product_list(request, pk):
-    template = get_template('shop/product.html')
     product = Product.objects.filter(pk=pk).all()
-    body = template.render({'product': product})
-    return HttpResponse(body)
+    return render(request, 'shop/product.html', {'product': product})
 
 
-def cart(reqeust):
-    template = get_template('shop/cart.html')
-    body = template.render({})
-    return HttpResponse(body)
+def cart(request):
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, checked_at__isnull=True)
+
+        cart_products = CartProduct.objects.filter(cart=cart)
+        return render(request, 'shop/cart.html', {'cart_products': cart_products})
+    else:
+        return HttpResponseRedirect(reverse('category_list'))
 
 
 def index_list(request):
-    template = get_template('shop/index-7.html')
     index = Index.objects.all()
-    body = template.render({'index': index})
-    return HttpResponse(body)
+    return render(request, 'shop/index-7.html', {'index': index})
+
+
+def index(request):
+    return render(request, 'shop/index-2.html')
+
+
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('category_list'))
 
 
 def product_detail(request, pk):
@@ -70,12 +82,18 @@ def product_detail(request, pk):
         product = Product.objects.filter(pk=pk).get()
     except ObjectDoesNotExist:
         raise Http404()
-    product_sizes = ProductSize.objects.filter(product=product).all()
+    product_sizes = ProductSize.objects.filter(product=product)
     product_colors = ProductColor.objects.filter(product=product).all()
     product_photos = ProductPhoto.objects.filter(product=product).all()
     product_ratings = ProductRating.objects.filter(product=product).all()
+<<<<<<< Updated upstream
     product_categories = Category.objects.filter(product=product).all()
     template = get_template('shop/product.html')
     r = template.render({'product': product, 'product_sizes': product_sizes, 'product_colors': product_colors,
                          'product_photos': product_photos, 'product_ratings': product_ratings, 'product_categories' : product_categories})
     return HttpResponse(r)
+=======
+    return render(request, 'shop/product.html',
+                  {'product': product, 'product_sizes': product_sizes, 'product_colors': product_colors,
+                   'product_photos': product_photos, 'product_ratings': product_ratings})
+>>>>>>> Stashed changes

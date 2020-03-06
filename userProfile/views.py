@@ -1,12 +1,12 @@
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotAllowed
-from django.shortcuts import render
 from django.template.loader import get_template
 from django.urls import reverse
 from django.views import View
 
 UserModel = get_user_model()
+
 
 def login_list(request):
     if request.method == 'GET':
@@ -47,4 +47,3 @@ class LogoutView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
         return HttpResponseRedirect(reverse('login'))
-

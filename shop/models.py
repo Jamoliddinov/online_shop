@@ -1,6 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+<<<<<<< Updated upstream
 from django.utils import timezone
+=======
+>>>>>>> Stashed changes
 
 UserModel = get_user_model()
 
@@ -15,7 +18,7 @@ class Category(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=255)
     img = models.ImageField(null=True)
-    description = models.CharField(max_length=255, null=True, blank=True)
+    description = models.CharField(max_length =255, null=True, blank=True)
     quantity = models.IntegerField()
     price = models.FloatField()
     link = models.URLField(null=True, blank=True)
@@ -50,6 +53,7 @@ class ProductColor(models.Model):
 
 class Cart(models.Model):
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='carts')
+    checked_at = models.DateTimeField(null=True)
 
     @property
     def sum(self):
@@ -61,7 +65,6 @@ class Cart(models.Model):
 
 
 class CartProduct(models.Model):
-
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='CartProduct')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cartproducts')
     quantity = models.PositiveIntegerField()
