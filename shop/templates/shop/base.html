@@ -536,7 +536,7 @@
                         {% if user.is_authenticated %}
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-cart-products">
-                                    {% for card_product in cart_products %}
+                                    {% for card_product in cart.cart_products.all %}
                                         <div class="product">
                                             <div class="product-cart-details">
                                                 <h4 class="product-title">

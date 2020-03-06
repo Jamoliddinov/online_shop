@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.db.models import Index
@@ -17,6 +18,7 @@ def category_list(request):
     return render(request, 'shop/category.html', {'products_pagination': products_pagination, 'user': request.user})
 
 
+@login_required(login_url='/login')
 def add_to_cart(request, pk, quantity=1):
     cart, created = Cart.objects.get_or_create(user=request.user, checked_at__isnull=True)
     new_product_cart = CartProduct(cart=cart, product_id=pk, quantity=quantity)
