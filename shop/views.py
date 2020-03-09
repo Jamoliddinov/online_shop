@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.db.models import Index
@@ -7,15 +7,17 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+from shop.filters import ProductFilter
 from shop.models import ProductSize, ProductColor, ProductPhoto, ProductRating, Product, Cart, CartProduct
+from shop.utils import RequestPaginator
 
 
 def category_list(request):
     products = Product.objects.all()
-    paginator = Paginator(products, 6)
-    page = request.GET.get('page', 1)
-    products_pagination = paginator.page(page)
-    return render(request, 'shop/category.html', {'products_pagination': products_pagination, 'user': request.user})
+    f = ProductFilter(request.GET, queryset=products)
+    paginator = RequestPaginator(f.qs, 6, request=request)
+    page = paginator.get_page()
+    return render(request, 'shop/category.html', {'products_pagination': page, 'f': f})
 
 
 @login_required(login_url='/login')
