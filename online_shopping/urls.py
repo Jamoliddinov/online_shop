@@ -28,7 +28,6 @@ app_name = "shops"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('category/', category_list, name='category_list'),
     path('index/', index_list),
     path('login/', login_list, name='login'),
     path('register/', register, name='register'),
@@ -38,6 +37,9 @@ urlpatterns = [
     path('logout/', logout_user, name='logout_user'),
     # path('404/', notFoundPage_list)
 ]
+urlpatterns += i18n_patterns(
+    path('category/', category_list, name='category_list'),
+)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
