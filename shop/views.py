@@ -7,14 +7,14 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from shop.filters import CategoryFilter
+from shop.filters import ProductFilter
 from shop.models import ProductSize, ProductColor, ProductPhoto, ProductRating, Product, Cart, CartProduct
 from shop.utils import RequestPaginator
 
 
 def category_list(request):
     products = Product.objects.all()
-    f = CategoryFilter(request.GET, queryset=products)
+    f = ProductFilter(request.GET, queryset=products)
     paginator = RequestPaginator(f.qs, 6, request=request)
     page = paginator.get_page()
     return render(request, 'shop/category.html', {'products_pagination': page, 'f': f})

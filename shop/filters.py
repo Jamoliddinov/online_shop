@@ -1,11 +1,11 @@
 import django_filters
 
-from shop.models import Category
+from shop.models import Category, Product
 
 
-class CategoryFilter(django_filters.FilterSet):
+class ProductFilter(django_filters.FilterSet):
     categories = django_filters.ModelMultipleChoiceFilter(queryset=Category.objects.all(), field_name='categories')
 
     class Meta:
-        model = Category
+        model = Product
         fields = ['categories']
