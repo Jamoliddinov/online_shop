@@ -1,7 +1,9 @@
 from django.contrib.auth import get_user_model
-from django.template import Library
+from django import template
 
-register = Library()
+from shop.models import Product
+
+register = template.Library()
 
 
 @register.simple_tag
@@ -10,6 +12,13 @@ def counter():
     return user
 
 
-# @register.filter
-# def multiply(value, arg):
-#     return value * arg
+@register.filter
+def category_count_product(request, id):
+    list = request.GET.getlist('categories')
+    return True if str(id) in list else False
+
+
+@register.filter(name='product_count')
+def product_counter_by_category(id):
+    if id:
+        return Product.objects.filter(categories=id).count()

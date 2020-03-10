@@ -1,5 +1,6 @@
 {% extends 'shop/base.html' %}
 {% load static %}
+{% load hometags %}
 
 {% block nav_bar %}
     <main class="main">
@@ -191,9 +192,8 @@
                                 </ul>
                             {% endif %}
                         </nav>
-
-
                     </div><!-- End .col-lg-9 -->
+
                     <aside class="col-lg-3 order-lg-first">
                         <div class="sidebar sidebar-shop">
                             <form action="{{ request.path }}" method="get">
@@ -216,12 +216,18 @@
                                                 {% for category in f.form.categories %}
                                                     <div class="filter-item">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input name="categories" type="checkbox" value="{{ category.data.value }}" class="custom-control-input"
-                                                                   id="cat-{{ forloop.counter }}"/>
+                                                            <input name="categories" type="checkbox"
+                                                                   value="{{ category.data.value }}"
+                                                                   class="custom-control-input"
+                                                                   id="cat-{{ forloop.counter }}"
+                                                                    {% if request|category_count_product:category.data.value %}
+                                                                   checked
+                                                                    {% endif %}
+                                                            />
                                                             <label class="custom-control-label"
                                                                    for="cat-{{ forloop.counter }}">{{ category }}</label>
                                                         </div><!-- End .custom-checkbox -->
-                                                        <span class="item-count">3</span>
+                                                        <span class="item-count">{{ category.data.value|product_count }}</span>
                                                     </div><!-- End .filter-item -->
                                                 {% endfor %}
                                             </div><!-- End .filter-items -->
@@ -396,7 +402,8 @@
 
                                 <div class="widget widget-collapsible">
                                     <h3 class="widget-title">
-                                        <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true"
+                                        <a data-toggle="collapse" href="#widget-5" role="button"
+                                           aria-expanded="true"
                                            aria-controls="widget-5">
                                             Price
                                         </a>
@@ -409,7 +416,7 @@
                                                     Price Range:
                                                     <span id="filter-price-range"></span>
                                                 </div><!-- End .filter-price-text -->
-
+                                                {{ f.form.price }}
                                                 <div id="price-slider"></div><!-- End #price-slider -->
                                             </div><!-- End .filter-price -->
                                         </div><!-- End .widget-body -->
