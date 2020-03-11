@@ -26,6 +26,10 @@ from django.conf.urls.i18n import i18n_patterns
 app_name = "shops"
 
 urlpatterns = [
+
+]
+urlpatterns += i18n_patterns(
+    path('category/', category_list, name='category_list'),
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('index/', index_list),
@@ -36,9 +40,6 @@ urlpatterns = [
     path('product/<int:pk>', product_detail, name='product_detail'),
     path('logout/', logout_user, name='logout_user'),
     # path('404/', notFoundPage_list)
-]
-urlpatterns += i18n_patterns(
-    path('category/', category_list, name='category_list'),
 )
 
 if settings.DEBUG:
