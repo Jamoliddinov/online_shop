@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-11 16:57+0500\n"
+"POT-Creation-Date: 2020-03-11 20:35+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,10 +28,6 @@ msgstr "Английский"
 msgid "Russian"
 msgstr "Русский"
 
-#: .\shop\templates\shop\base.html:104
-msgid "Home"
-msgstr ""
-
 #: .\shop\templates\shop\base.html:313
 msgid "SHOP"
 msgstr "МАГАЗИН"
@@ -40,9 +36,10 @@ msgstr "МАГАЗИН"
 msgid "PRODUCT"
 msgstr "ПРОДУКТ"
 
-#: .\shop\templates\shop\category.html:101
-msgid "New"
-msgstr ""
+#: .\shop\templates\shop\product.html:143
+msgid "ago"
+msgstr "назад"
 
-#~ msgid "HOME"
-#~ msgstr "МЕНЮ"
+#: .\shop\templates\shop\base.html:104
+msgid "HOME"
+msgstr "МЕНЮ"
