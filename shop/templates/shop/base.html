@@ -1,5 +1,6 @@
 {% load static %}
 {% load static i18n %}
+{% load hometags %}
 {% get_current_language as LANGUAGE_CODE %}
 
 <!DOCTYPE html>
@@ -427,10 +428,11 @@
                 <div class="header-right">
                     <div class="header-search">
                         <a href="#" class="search-toggle" role="button" title="Search"><i class="icon-search"></i></a>
-                        <form action="#" method="get">
+                        <form action="{{ request.path }}" method="get">
                             <div class="header-search-wrapper">
+
                                 <label for="q" class="sr-only">Search</label>
-                                <input type="search" class="form-control" name="q" id="q" placeholder="Search in..."
+                                <input type="search" class="form-control" name="search" id="q" placeholder="Search in..."
                                        required>
                             </div><!-- End .header-search-wrapper -->
                         </form>
@@ -440,7 +442,7 @@
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false" data-display="static">
                             <i class="icon-shopping-cart"></i>
-                            <span class="cart-count">2</span>
+                            <span class="cart-count">{{cart.cart_products.count}}</span>
                         </a>
                         {% if user.is_authenticated %}
                             <div class="dropdown-menu dropdown-menu-right">
@@ -460,11 +462,11 @@
 
                                             <figure class="product-image-container">
                                                 <a href="product.html" class="product-image">
-                                                    <img src="{% static 'assets/images/products/cart/' %}/ {{ card_product.product.img }}"
+                                                    <img src="{{ card_product.product.img.url }}"
                                                          alt="product">
                                                 </a>
                                             </figure>
-                                            <a href="#" class="btn-remove" title="Remove Product"><i
+                                            <a href="{% url 'del_product_from_cart' card_product.product.id %}" class="btn-remove" title="Remove Product"><i
                                                     class="icon-close"></i></a>
                                         </div><!-- End .product -->
                                     {% endfor %}
@@ -472,8 +474,7 @@
 
                                 <div class="dropdown-cart-total">
                                     <span>Total</span>
-
-                                    <span class="cart-total-price">$160.00</span>
+                                    <span class="cart-total-price">${{ cart.cart_products.all|total_sum }}</span>
                                 </div><!-- End .dropdown-cart-total -->
 
                                 <div class="dropdown-cart-action">

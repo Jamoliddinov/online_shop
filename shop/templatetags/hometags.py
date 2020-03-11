@@ -13,6 +13,14 @@ def counter():
 
 
 @register.filter
+def total_sum(card_products):
+    sum = 0
+    for cart_product in card_products:
+        sum += cart_product.quantity * cart_product.product.price
+    return sum
+
+
+@register.filter
 def category_count_product(request, id):
     list = request.GET.getlist('categories')
     return True if str(id) in list else False

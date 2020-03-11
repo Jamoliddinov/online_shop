@@ -28,6 +28,14 @@ def add_to_cart(request, pk, quantity=1):
     return redirect(reverse('cart'))
 
 
+@login_required(login_url='/login')
+def del_product_from_cart(request, id):
+    cart = Cart.objects.get(user=request.user)
+    product_cart = CartProduct.objects.all(cart=cart, product_id=id)
+    product_cart.delete()
+    return redirect(reverse('cart'))
+
+
 # do not touch it
 # def notFoundPage_list(request):
 #     template = get_template('shop/404.html')
