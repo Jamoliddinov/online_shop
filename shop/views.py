@@ -6,8 +6,10 @@ from django.db.models import Index
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.utils import timezone
 
 from shop.filters import ProductFilter
+from shop.forms import UserLoginForm
 from shop.models import ProductSize, ProductColor, ProductPhoto, ProductRating, Product, Cart, CartProduct
 from shop.utils import RequestPaginator
 
@@ -23,8 +25,18 @@ def category_list(request):
 @login_required(login_url='/login')
 def add_to_cart(request, pk, quantity=1):
     cart, created = Cart.objects.get_or_create(user=request.user, checked_at__isnull=True)
-    new_product_cart = CartProduct(cart=cart, product_id=pk, quantity=quantity)
-    new_product_cart.save()
+    new_product_cart, created = CartProduct.objects.get_or_create(cart=cart, product_id=pk,
+                                                                  defaults=dict(quantity=quantity))
+    if not created:
+        new_product_cart.quantity += quantity
+        new_product_cart.save()
+    return redirect(reverse('cart'))
+
+
+@login_required(login_url='/login')
+def del_product_from_cart(request, id):
+    cart = Cart.objects.get_or_create(user=request.user)
+    CartProduct.objects.filter(cart=cart, product_id=id).delete()
     return redirect(reverse('cart'))
 
 
@@ -41,9 +53,9 @@ def login_list(request):
         # body = template.render({'request': request})
         return render(request, 'shop/login.html', {'user': request.user})
     else:
-        email = request.POST['email']
-        password = request.POST['password']
-        user = authenticate(request, username=email, password=password)
+        form = UserLoginForm(request.POST)
+        a = form.is_valid()
+        user = authenticate(request, **form.cleaned_data)
         if user:
             # sucessful login
             login(request, user)
@@ -60,7 +72,6 @@ def product_list(request, pk):
 def cart(request):
     if request.user.is_authenticated:
         cart, created = Cart.objects.get_or_create(user=request.user, checked_at__isnull=True)
-
         cart_products = CartProduct.objects.filter(cart=cart)
         return render(request, 'shop/cart.html', {'cart_products': cart_products})
     else:
@@ -79,6 +90,13 @@ def index(request):
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('category_list'))
+
+
+def cart_checkout(request):
+    cart = Cart.objects.get(user=request.user)
+    cart.checked_at = timezone.now()
+    cart.save()
+    return HttpResponseRedirect(reverse('cart'))
 
 
 def product_detail(request, pk):

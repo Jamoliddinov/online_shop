@@ -37,6 +37,10 @@ class Product(models.Model):
     def rating_count(self):
         return len(self.productratings.all())
 
+    @property
+    def is_new(self):
+        return True
+
 
 class ProductSize(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_sizes')

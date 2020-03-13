@@ -19,7 +19,8 @@ from django.http import HttpResponse
 from django.urls import path
 
 from online_shopping import settings
-from shop.views import category_list, index_list, login_list, product_detail, cart, add_to_cart, logout_user, index
+from shop.views import category_list, index_list, login_list, product_detail, cart, add_to_cart, logout_user, index, \
+    del_product_from_cart, cart_checkout
 from userProfile.views import register
 from django.conf.urls.i18n import i18n_patterns
 
@@ -37,8 +38,10 @@ urlpatterns += i18n_patterns(
     path('register/', register, name='register'),
     path('cart/', cart, name='cart'),
     path('cart/add-to-cart/<int:pk>/<int:quantity>/', add_to_cart, name='add_to_cart'),
+    path('cart/del-product-from-cart/<int:id>/', del_product_from_cart, name='del_product_from_cart'),
     path('product/<int:pk>', product_detail, name='product_detail'),
     path('logout/', logout_user, name='logout_user'),
+    path('check-out/', cart_checkout, name='cart_checkout'),
     # path('404/', notFoundPage_list)
 )
 

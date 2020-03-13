@@ -13,9 +13,17 @@ def counter():
 
 
 @register.filter
-def category_count_product(request, id):
-    list = request.GET.getlist('categories')
-    return True if str(id) in list else False
+def total_sum(card_products):
+    sum = 0
+    for cart_product in card_products:
+        sum += cart_product.quantity * cart_product.product.price
+    return sum
+
+
+@register.simple_tag(takes_context=True)
+def category_checker(context, category_id):
+    list = context['request'].GET.getlist('categories')
+    return str(category_id) in list
 
 
 @register.filter(name='product_count')

@@ -1,6 +1,7 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 {% load carttags %}
+{% load hometags %}
 
 {% block nav_bar %}
     <main class="main">
@@ -60,9 +61,9 @@
                                             </div><!-- End .cart-product-quantity -->
                                         </td>
                                         <td class="total-col">
-                                            $ {{ card_product.quantity|mul:card_product.product.price }}</td>
+                                            ${{ card_product.quantity|mul:card_product.product.price }}</td>
                                         <td class="remove-col">
-                                            <button class="btn-remove"><i class="icon-close"></i></button>
+                                            <a href="{% url 'del_product_from_cart' card_product.product.id %}" class="btn-remove"><i class="icon-close"></i></a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -96,7 +97,7 @@
                                     <tbody>
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td>$160.00</td>
+                                        <td>$&nbsp;{{ cart.cart_products.all|total_sum }}</td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr class="summary-shipping">
                                         <td>Shipping:</td>
@@ -153,7 +154,7 @@
                                     </tbody>
                                 </table><!-- End .table table-summary -->
 
-                                <a href="checkout.html" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED
+                                <a href="{% url 'cart_checkout' %}" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED
                                     TO
                                     CHECKOUT</a>
                             </div><!-- End .summary -->
