@@ -1,5 +1,5 @@
 {% load static %}
-{% load static i18n %}
+{% load i18n %}
 {% load hometags %}
 {% get_current_language as LANGUAGE_CODE %}
 
@@ -48,12 +48,12 @@
             <div class="container">
                 <div class="header-left">
                     <div class="header-dropdown">
-                        <a href="">Eng</a>
+                        <a href="">{% trans request.LANGUAGE_CODE %}</a>
                         <div class="header-menu">
                             <ul>
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">Russian</a></li>
-                                <li><a href="#">Uzbek</a></li>
+                                <li><a href="{% url_language_replace 'en' %}">English</a></li>
+                                <li><a href="{% url_language_replace 'ru' %}">Русский</a></li>
+                                <li><a href="{% url_language_replace 'uz' %}">O'zbek tili</a></li>
                             </ul>
                         </div><!-- End .header-menu -->
                     </div><!-- End .header-dropdown -->

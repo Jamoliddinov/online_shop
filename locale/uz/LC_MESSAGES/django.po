@@ -45,3 +45,7 @@ msgstr ""
 #: shop/templates/shop/product.html:143
 msgid "ago"
 msgstr ""
+
+#: shop/templates/shop/base.html:51
+msgid "uz"
+msgstr "o'z"

@@ -60,3 +60,11 @@ class RequestPaginator(Paginator):
 
     def get_page(self, **kwargs):
         return super().get_page(self.request.GET.get(self.page_query_param))
+
+
+def replace_language_url(request, language):
+    url = request.build_absolute_uri()
+    (scheme, netloc, path, query, fragment) = urlparse.urlsplit(force_str(url))
+    paths = path.split('/')
+    paths[1] = language
+    return urlparse.urlunsplit((scheme, netloc, '/'.join(paths), query, fragment))

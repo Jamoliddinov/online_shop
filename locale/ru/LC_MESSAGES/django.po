@@ -47,3 +47,7 @@ msgstr "ПРОДУКТ"
 #: shop/templates/shop/product.html:143
 msgid "ago"
 msgstr "назад"
+
+#: shop/templates/shop/base.html:51
+msgid "ru"
+msgstr "ру"
