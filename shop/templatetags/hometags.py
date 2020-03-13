@@ -20,10 +20,10 @@ def total_sum(card_products):
     return sum
 
 
-@register.filter
-def category_count_product(request, id):
-    list = request.GET.getlist('categories')
-    return True if str(id) in list else False
+@register.simple_tag(takes_context=True)
+def category_checker(context, category_id):
+    list = context['request'].GET.getlist('categories')
+    return str(category_id) in list
 
 
 @register.filter(name='product_count')
