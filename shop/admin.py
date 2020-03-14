@@ -6,11 +6,17 @@ from shop.models import Category, Product, Cart, ProductColor, ProductRating, Pr
 class ProductAdmin(TranslationAdmin):
     pass
 
+class RatingAdmin(TranslationAdmin):
+    pass
+
+class ColorAdmin(TranslationAdmin):
+    pass
+
 
 admin.site.register(Category)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(ProductColor)
-admin.site.register(ProductRating)
+admin.site.register(ProductColor, ColorAdmin)
+admin.site.register(ProductRating, RatingAdmin)
 admin.site.register(ProductSize)
 admin.site.register(ProductPhoto)
 admin.site.register(CartProduct)

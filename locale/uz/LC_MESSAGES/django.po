@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-13 14:30+0000\n"
+"POT-Creation-Date: 2020-03-14 19:44+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,34 +18,157 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: online_shopping/settings.py:143
+#: .\online_shopping\settings.py:143
 msgid "English"
 msgstr ""
 
-#: online_shopping/settings.py:144
+#: .\online_shopping\settings.py:144
 msgid "Russian"
 msgstr ""
 
-#: online_shopping/settings.py:145
+#: .\online_shopping\settings.py:145
 msgid "Uzbek"
 msgstr ""
 
-#: shop/templates/shop/base.html:96
+#: .\shop\templates\shop\base.html:68
+msgid "Logout"
+msgstr ""
+
+#: .\shop\templates\shop\base.html:71
+msgid "Login"
+msgstr ""
+
+#: .\shop\templates\shop\base.html:96
 msgid "HOME"
-msgstr ""
+msgstr "BOSH SAHIFA"
 
-#: shop/templates/shop/base.html:305
+#: .\shop\templates\shop\base.html:305
 msgid "SHOP"
-msgstr ""
+msgstr "DO'KON"
 
-#: shop/templates/shop/base.html:376
+#: .\shop\templates\shop\base.html:376
 msgid "PRODUCT"
-msgstr ""
+msgstr "MAHSULOT"
 
-#: shop/templates/shop/product.html:143
+#: .\shop\templates\shop\base.html:701 .\shop\templates\shop\login.html:31
+msgid "Username or email address *"
+msgstr "Foydalanuvchining ismi yoki pochta manzili *"
+
+#: .\shop\templates\shop\base.html:707 .\shop\templates\shop\base.html:754
+#: .\shop\templates\shop\login.html:37 .\shop\templates\shop\login.html:85
+msgid "Password *"
+msgstr "Parol *"
+
+#: .\shop\templates\shop\base.html:724 .\shop\templates\shop\login.html:53
+msgid "Forgot Your Password?"
+msgstr "Parolingizni unutdingizmi?"
+
+#: .\shop\templates\shop\base.html:728 .\shop\templates\shop\base.html:774
+#: .\shop\templates\shop\login.html:57 .\shop\templates\shop\login.html:105
+msgid "or sign in with"
+msgstr "yoki ro'yxatdan"
+
+#: .\shop\templates\shop\base.html:733 .\shop\templates\shop\base.html:779
+#: .\shop\templates\shop\login.html:62 .\shop\templates\shop\login.html:110
+msgid "Login With Google"
+msgstr "Google orqali o'tish"
+
+#: .\shop\templates\shop\base.html:739 .\shop\templates\shop\base.html:785
+#: .\shop\templates\shop\login.html:68 .\shop\templates\shop\login.html:116
+msgid "Login With Facebook"
+msgstr "Facebook orqali o'tish"
+
+#: .\shop\templates\shop\base.html:748 .\shop\templates\shop\login.html:79
+msgid "Your email address *"
+msgstr "Pochta manzilingiz *"
+
+#: .\shop\templates\shop\base.html:761 .\shop\templates\shop\login.html:92
+msgid "SIGN UP"
+msgstr "RO'YXATDAN O'TISH"
+
+#: .\shop\templates\shop\base.html:768 .\shop\templates\shop\login.html:99
+msgid "I agree to the"
+msgstr "Men barcha"
+
+#: .\shop\templates\shop\base.html:769 .\shop\templates\shop\login.html:100
+msgid "privacy policy"
+msgstr "qoida va shartlarga roziman"
+
+#: .\shop\templates\shop\category.html:23
+msgid "Showing"
+msgstr "Ko'rsatildi"
+
+#: .\shop\templates\shop\category.html:24
+msgid "of"
+msgstr "dan"
+
+#: .\shop\templates\shop\category.html:25
+msgid "Products"
+msgstr "Mahsulotlar"
+
+#: .\shop\templates\shop\category.html:131
+msgid "Reviews"
+msgstr "Отзывы"
+
+#: .\shop\templates\shop\category.html:194
+msgid "Filters:"
+msgstr "Saralash:"
+
+#: .\shop\templates\shop\category.html:202
+msgid "Category"
+msgstr "Kategoriya"
+
+#: .\shop\templates\shop\login.html:19
+msgid "Sign In"
+msgstr "Tizimga kirish"
+
+#: .\shop\templates\shop\login.html:23
+msgid "Register"
+msgstr "Ro'yxatdan o'tish"
+
+#: .\shop\templates\shop\login.html:44
+msgid "LOG IN"
+msgstr "Kirish"
+
+#: .\shop\templates\shop\login.html:50
+msgid "Remember Me"
+msgstr "Meni eslab qol"
+
+#: .\shop\templates\shop\product.html:60
+msgid "Size:"
+msgstr "O'lcham:"
+
+#: .\shop\templates\shop\product.html:64
+msgid "Select a size"
+msgstr "Tanlash"
+
+#: .\shop\templates\shop\product.html:73
+msgid "Color:"
+msgstr "Rangi:"
+
+#: .\shop\templates\shop\product.html:76
+msgid "Select a color"
+msgstr "Tanlash"
+
+#: .\shop\templates\shop\product.html:87
+msgid "Qty:"
+msgstr "Soni:"
+
+#: .\shop\templates\shop\product.html:94
+msgid "add to cart"
+msgstr "Savatga qo'shish"
+
+#: .\shop\templates\shop\product.html:100
+msgid "Category:"
+msgstr "Kategoriya:"
+
+#: .\shop\templates\shop\product.html:135
 msgid "ago"
-msgstr ""
+msgstr "avval"
 
-#: shop/templates/shop/base.html:51
-msgid "uz"
-msgstr "o'z"
+#: .\shop\templates\shop\product.html:151
+msgid "You May Also Like"
+msgstr "Sizga yoqishi mumkin"
+
+#~ msgid "uz"
+#~ msgstr "o'z"

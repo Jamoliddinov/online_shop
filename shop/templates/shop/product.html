@@ -6,15 +6,7 @@
     <main class="main">
         <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
             <div class="container d-flex align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Products</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Default</li>
-                </ol>
 
-                <nav class="product-pager ml-auto" aria-label="Product">
-
-                </nav><!-- End .pager-nav -->
             </div><!-- End .container -->
         </nav><!-- End .breadcrumb-nav -->
 
@@ -57,7 +49,7 @@
                                     </div><!-- End .rating-container -->
 
                                     <div class="product-price">
-                                        {{product.price}}
+                                        ${{product.price}}
                                     </div><!-- End .product-price -->
 
                                     <div class="product-content">
@@ -65,11 +57,11 @@
                                     </div><!-- End .product-content -->
 
                                     <div class="details-filter-row details-row-size">
-                                        <label>Size:</label>
+                                        <label>{% trans "Size:" %}</label>
 
                                         <div class="select-custom">
                                             <select name="color" id="color" class="form-control">
-                                                <option value="#" selected="selected">Select a size</option>
+                                                <option value="#" selected="selected">{% trans "Select a size" %}</option>
                                                 {% for product_size in product_sizes %}
                                                 <option value="{{product_size.size}}">{{product_size.size}}</option>
                                                 {% endfor %}
@@ -78,10 +70,10 @@
                                     </div><!-- End .details-filter-row -->
 
                                     <div class="details-filter-row details-row-size">
-                                        <label for="size">Color:</label>
+                                        <label for="size">{% trans "Color:" %}</label>
                                         <div class="select-custom">
                                             <select name="size" id="size" class="form-control">
-                                                <option value="#" selected="selected">Select a color</option>
+                                                <option value="#" selected="selected">{% trans "Select a color" %}</option>
                                                 {% for product_color in product_colors %}
                                                 <option value="{{product_color.color}}">{{product_color.color}}</option>
                                                 {% endfor %}
@@ -92,20 +84,20 @@
                                     </div><!-- End .details-filter-row -->
 
                                     <div class="details-filter-row details-row-size">
-                                        <label for="qty">Qty:</label>
+                                        <label for="qty">{% trans "Qty:" %}</label>
                                         <div class="product-details-quantity">
                                             <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
                                         </div><!-- End .product-details-quantity -->
                                     </div><!-- End .details-filter-row -->
 
                                     <div class="product-details-action">
-                                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <a href="#" class="btn-product btn-cart"><span>{% trans "add to cart" %}</span></a>
 
                                     </div><!-- End .product-details-action -->
 
                                     <div class="product-details-footer">
                                         <div class="product-cat">
-                                            <span>Category:</span>
+                                            <span>{% trans "Category:" %}</span>
                                             {% for category in product_categories %}
                                             <a> {{category.name}}</a>
                                             {% endfor %}
@@ -126,7 +118,7 @@
 
                     <div class="product-details-tab">
                             <div class="nav-item" align="center">
-                                <a class="nav-link active" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews ({{product.rating_count}})</a>
+                                <a class="nav-link active" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">{% trans "Reviews" ({{product.rating_count}})</a>
                             </div>
                             <div class="tab-pane fade active show" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
                                 <div class="reviews">
@@ -137,7 +129,7 @@
                                                 <h4><a href="#">{{product_rating.user.first_name}}</a></h4>
                                                 <div class="ratings-container">
                                                     <div class="ratings">
-                                                        <div class="ratings-val" style="width: {{product_rating.rating_percentage}}%;"></div><!-- End .ratings-val -->
+                                                        <div class="ratings-val" style="width:{{product_rating.product.rating_percentage}}%;"></div><!-- End .ratings-val -->
                                                     </div><!-- End .ratings -->
                                                 </div><!-- End .rating-container -->
                                                 <span class="review-date">{{product_rating.created_at|timesince}} {% trans "ago" %}</span>
@@ -156,7 +148,7 @@
                         </div><!-- End .tab-content -->
                     </div><!-- End .product-details-tab -->
 
-            <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
+            <h2 class="title text-center mb-4">{% trans "You May Also Like" %} </h2><!-- End .title text-center -->
 
             <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
                  data-owl-options='{

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-13 14:30+0000\n"
+"POT-Creation-Date: 2020-03-14 19:44+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,34 +20,157 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: online_shopping/settings.py:143
+#: .\online_shopping\settings.py:143
 msgid "English"
 msgstr "Английский"
 
-#: online_shopping/settings.py:144
+#: .\online_shopping\settings.py:144
 msgid "Russian"
 msgstr "Русский"
 
-#: online_shopping/settings.py:145
+#: .\online_shopping\settings.py:145
 msgid "Uzbek"
 msgstr ""
 
-#: shop/templates/shop/base.html:96
+#: .\shop\templates\shop\base.html:68
+msgid "Logout"
+msgstr "Выйти"
+
+#: .\shop\templates\shop\base.html:71
+msgid "Login"
+msgstr "Авторизоваться"
+
+#: .\shop\templates\shop\base.html:96
 msgid "HOME"
 msgstr "МЕНЮ"
 
-#: shop/templates/shop/base.html:305
+#: .\shop\templates\shop\base.html:305
 msgid "SHOP"
 msgstr "МАГАЗИН"
 
-#: shop/templates/shop/base.html:376
+#: .\shop\templates\shop\base.html:376
 msgid "PRODUCT"
 msgstr "ПРОДУКТ"
 
-#: shop/templates/shop/product.html:143
+#: .\shop\templates\shop\base.html:701 .\shop\templates\shop\login.html:31
+msgid "Username or email address *"
+msgstr "Имя пользователя или адрес электронной почты *"
+
+#: .\shop\templates\shop\base.html:707 .\shop\templates\shop\base.html:754
+#: .\shop\templates\shop\login.html:37 .\shop\templates\shop\login.html:85
+msgid "Password *"
+msgstr "Пароль *"
+
+#: .\shop\templates\shop\base.html:724 .\shop\templates\shop\login.html:53
+msgid "Forgot Your Password?"
+msgstr "Забыли свой пароль?"
+
+#: .\shop\templates\shop\base.html:728 .\shop\templates\shop\base.html:774
+#: .\shop\templates\shop\login.html:57 .\shop\templates\shop\login.html:105
+msgid "or sign in with"
+msgstr "или войдите с помощью"
+
+#: .\shop\templates\shop\base.html:733 .\shop\templates\shop\base.html:779
+#: .\shop\templates\shop\login.html:62 .\shop\templates\shop\login.html:110
+msgid "Login With Google"
+msgstr "Войти через Google"
+
+#: .\shop\templates\shop\base.html:739 .\shop\templates\shop\base.html:785
+#: .\shop\templates\shop\login.html:68 .\shop\templates\shop\login.html:116
+msgid "Login With Facebook"
+msgstr "Войти через Facebook"
+
+#: .\shop\templates\shop\base.html:748 .\shop\templates\shop\login.html:79
+msgid "Your email address *"
+msgstr "Ваша электронная почта *"
+
+#: .\shop\templates\shop\base.html:761 .\shop\templates\shop\login.html:92
+msgid "SIGN UP"
+msgstr "ЗАРЕГИСТРИРОВАТЬСЯ"
+
+#: .\shop\templates\shop\base.html:768 .\shop\templates\shop\login.html:99
+msgid "I agree to the"
+msgstr "Я согласен"
+
+#: .\shop\templates\shop\base.html:769 .\shop\templates\shop\login.html:100
+msgid "privacy policy"
+msgstr "политика конфиденциальности"
+
+#: .\shop\templates\shop\category.html:23
+msgid "Showing"
+msgstr "Показано"
+
+#: .\shop\templates\shop\category.html:24
+msgid "of"
+msgstr "из"
+
+#: .\shop\templates\shop\category.html:25
+msgid "Products"
+msgstr "Товары"
+
+#: .\shop\templates\shop\category.html:131
+msgid "Reviews"
+msgstr "Отзывы"
+
+#: .\shop\templates\shop\category.html:194
+msgid "Filters:"
+msgstr "Фильтры:"
+
+#: .\shop\templates\shop\category.html:202
+msgid "Category"
+msgstr "Категория"
+
+#: .\shop\templates\shop\login.html:19
+msgid "Sign In"
+msgstr "Войти в систему"
+
+#: .\shop\templates\shop\login.html:23
+msgid "Register"
+msgstr "Зарегистрируйтесь"
+
+#: .\shop\templates\shop\login.html:44
+msgid "LOG IN"
+msgstr "АВТОРИЗОВАТЬСЯ"
+
+#: .\shop\templates\shop\login.html:50
+msgid "Remember Me"
+msgstr "Запомните меня"
+
+#: .\shop\templates\shop\product.html:60
+msgid "Size:"
+msgstr "Размер:"
+
+#: .\shop\templates\shop\product.html:64
+msgid "Select a size"
+msgstr "Выбрать"
+
+#: .\shop\templates\shop\product.html:73
+msgid "Color:"
+msgstr "Цвет:"
+
+#: .\shop\templates\shop\product.html:76
+msgid "Select a color"
+msgstr "Выбрать"
+
+#: .\shop\templates\shop\product.html:87
+msgid "Qty:"
+msgstr "Кво:"
+
+#: .\shop\templates\shop\product.html:94
+msgid "add to cart"
+msgstr "добавить в корзину"
+
+#: .\shop\templates\shop\product.html:100
+msgid "Category:"
+msgstr "Категория:"
+
+#: .\shop\templates\shop\product.html:135
 msgid "ago"
 msgstr "назад"
 
-#: shop/templates/shop/base.html:51
-msgid "ru"
-msgstr "ру"
+#: .\shop\templates\shop\product.html:151
+msgid "You May Also Like"
+msgstr "Вам Также Может Понравиться"
+
+#~ msgid "ru"
+#~ msgstr "ру"
